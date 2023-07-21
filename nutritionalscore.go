@@ -55,31 +55,52 @@ var sugarLevelsBeverage = []float64{}
 // writing outlines for methods
 
 func (e EnergyKJ) GetPoints(st ScoreType) int {
-
+	if st == Beverage {
+		return getPointsFromRange(float64(e), enegeryLevelsBeverage)
+	}
+	return getPointsFromRange(float64(e), energyLevels)
 }
 
 func (s SugarGram) GetPoints(st ScoreType) int {
-
+	if st == Beverage {
+		return getPointsFromRange(float64(s), sugarLevelsBeverage)
+	}
+	return getPointsFromRange(float64(s), sugarsLevels)
 }
 
 func (s SaturatedFattyAcids) GetPoints(st ScoreType) int {
-
+	return getPointsFromRange(float64(s), SaturatedFattyAcids)
 }
 
 func (s SodiumMilligram) GetPoints(st ScoreType) int {
-
+	return getPointsFromRange(float64(s), SodiumLevels)
 }
 
 func (f FruitsPercet) GetPoints(st ScoreType) int {
-
+	if st == Beverage {
+		if f > 80 {
+			return 10
+		} else if f > 60 {
+			return 2
+		}
+		return 0
+	}
+	if f > 80 {
+		return 5
+	} else if f > 60 {
+		return 2
+	} else if f > 40 {
+		return 1
+	}
+	return 0
 }
 
 func (f FiberGram) GetPoints(st ScoreType) int {
-
+	return getPointsFromRange(float64(f), FiberLevels)
 }
 
 func (p ProteinGram) GetPoints(st ScoreType) int {
-
+	return getPointsFromRange(float64(p), ProteinLevels)
 }
 
 func EnergyFromKcal(kcal float64) EnergyKJ {
@@ -112,13 +133,16 @@ func GetNutritionalScore(n NutritionalData, st ScoreType) NutritionalScore {
 	}
 }
 
+func (ns NutritionalScore) GetNutriScore() string {
 
-func GetPointsFromRange(v float64, steps []float64) int {
+}
+
+func getPointsFromRange(v float64, steps []float64) int {
 	lenSteps := len(steps)
-	for i,l := range steps{
-		if v >  l {
+	for i, l := range steps {
+		if v > l {
 			return lenSteps - i
 		}
-	} 
+	}
 	return 0
 }
