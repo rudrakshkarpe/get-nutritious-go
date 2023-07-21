@@ -6,16 +6,16 @@ import (
 
 func main() {
 	ns := GetNutritionalScore(NutritionalData{
-		Energy:              EnergyFromKcal(0),
-		Sugars:              SugarGram(10),
+		Energy:              EnergyFromKcal(10),
+		Sugars:              SugarGram(20),
 		SaturatedFattyAcids: SaturatedFattyAcidsGram(2),
-		Sodium:              SodiumMilligram(500),
-		Fruits:              FruitsPercet(60),
-		Fiber:               FiberGram(4),
-		Protein:             ProteinGram(2),
+		Sodium:              SodiumMilligram(100),
+		Fruits:              FruitsPercet(30),
+		Fiber:               FiberGram(42),
+		Protein:             ProteinGram(12),
 	}, Food)
 
 	fmt.Printf("Nutritional Score: %d\n", ns.Value)
 	// optional to print NutriScore
-	// fmt.Printf("NutriScore: %s\n", ns.GetNutriScore())
+	fmt.Printf("NutriScore: %s\n", ns.GetNutriScore())
 }
