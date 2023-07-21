@@ -3,7 +3,7 @@ package main
 type ScoreType int
 
 const (
-	Food ScoreType = iota
+	Food ScoreType = iota // idiomatic way of declaring constants in the golang!
 	Beverage
 	Water
 	Cheese
@@ -16,11 +16,13 @@ type NutritionalScore struct {
 	ScoreType ScoreType
 }
 
+var scoreToLetter = []string{"A", "B", "C", "D", "E"}
+
 type EnergyKJ float64
 
 type SugarGram float64
 
-type SaturatedFattyAcids float64
+type SaturatedFattyAcidsGram float64
 
 type SodiumMilligram float64
 
@@ -30,12 +32,12 @@ type FiberGram float64
 
 type ProteinGram float64
 
-type NutritionalDate struct {
+type NutritionalData struct {
 	Energy              EnergyKJ
 	Sugars              SugarGram
-	SaturatedFattyAcids SaturatedFattyAcids
+	SaturatedFattyAcids SaturatedFattyAcidsGram
 	Sodium              SodiumMilligram
-	FruitsPercet        FruitsPercet
+	Fruits              FruitsPercet
 	Fiber               FiberGram
 	Protein             ProteinGram
 	IsWater             bool
@@ -68,7 +70,7 @@ func (s SugarGram) GetPoints(st ScoreType) int {
 	return getPointsFromRange(float64(s), sugarsLevels)
 }
 
-func (s SaturatedFattyAcids) GetPoints(st ScoreType) int {
+func (s SaturatedFattyAcidsGram) GetPoints(st ScoreType) int {
 	return getPointsFromRange(float64(s), SaturatedFattyAcids)
 }
 
@@ -107,7 +109,7 @@ func EnergyFromKcal(kcal float64) EnergyKJ {
 	return EnergyKJ(kcal * 4.184)
 }
 
-func SoduimFromsalt(SaltMg float64) SodiumMilligram {
+func SoduimFromsalt(saltMg float64) SodiumMilligram {
 	return SodiumMilligram(saltMg / 2.5)
 }
 
@@ -126,7 +128,14 @@ func GetNutritionalScore(n NutritionalData, st ScoreType) NutritionalScore {
 
 		if st == Cheese {
 			value = negative - positive
+		} else {
+			if negative > 11 && fruitPoints < 5 {
+				value = negative - positive - fruitPoints
+			} else {
+				value = negative - positive
+			}
 		}
+
 	}
 
 	return NutritionalScore{
@@ -138,6 +147,16 @@ func GetNutritionalScore(n NutritionalData, st ScoreType) NutritionalScore {
 }
 
 func (ns NutritionalScore) GetNutriScore() string {
+	// just going one step ahead, to have a grade would be a good idea in the code, that's why we are having this.
+	if ns.ScoreType == Food {
+		return scoreToLetter[getPointsFromRange(float64(ns.Value), []float64{18, 10, 2, -1})]
+	}
+	// ['a','b','c','d]
+
+	if ns.ScoreType == Water {
+		return scoreToLetter[0]
+	}
+	return scoreToLetter[getPointsFromRange(float64(ns.Value), []float64{9, 5, 2, -2})]
 
 }
 
