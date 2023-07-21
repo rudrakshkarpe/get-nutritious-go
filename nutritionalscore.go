@@ -117,12 +117,16 @@ func GetNutritionalScore(n NutritionalData, st ScoreType) NutritionalScore {
 	positive := 0
 	negative := 0
 
-	if st != water {
+	if st != Water {
 		fruitPoints := n.Fruits.GetPoints(st) // GetPoints:() is a method not function
 		fiberPoints := n.Fiber.GetPoints(st)
 
 		negative = n.Energy.GetPoints(st) + n.Sugars.GetPoints(st) + n.SaturatedFattyAcids.GetPoints(st) + n.Sodium.GetPoints(st)
-		positive = fruitPoints + fiberProtein + Protein
+		positive = fruitPoints + fiberPoints + n.Protein.GetPoints(st)
+
+		if st == Cheese {
+			value = negative - positive
+		}
 	}
 
 	return NutritionalScore{
