@@ -1,3 +1,3 @@
-module github.com/rudrakshkarpe/nutriproject
+module github.com/rudrakshkarpe/get-nutritious-go
 
 go 1.20
