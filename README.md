@@ -3,7 +3,7 @@ Library to check nutritional score
 
 
 ### Clone the repository as:
-- ```github.com/rudrakshkarpe/repo-name```
+- ```github.com/rudrakshkarpe/get-nutritious-go```
 
 ### Afterwards navigate to the directiory and run as: 
 - ``` go run . ```
