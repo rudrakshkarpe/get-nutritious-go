@@ -1,6 +1,6 @@
 # get-nutritious-go
 
-Pure Golang library to check nutritional score
+- Golang library to check nutritional score
 
 ### Clone the repository as:
 
