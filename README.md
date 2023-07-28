@@ -8,7 +8,7 @@
 
 ### Afterwards navigate to the directory and run as:
 
-`go run .`
+```go run .```
 
 ### Your output should look like this:
 
