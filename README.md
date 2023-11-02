@@ -12,7 +12,7 @@
 
 ### Your output should look like this:
 
-![Output Image](src/output.png)
+<img src="src/output.png" width="700" height="200">
 
 <details>
 <summary> Check List✅: </summary>
