@@ -15,10 +15,9 @@
 ![Output Image](src/output.png)
 
 <details>
-<summary> Check List✅: <summary>
+<summary> Check List✅: </summary>
 
   -  Develop custome feature for userinput
   -  Upload the Go libarary index
   -  Refactor code
-
 </details>
